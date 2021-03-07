@@ -31,6 +31,12 @@ The file should contain the following fields:
 - Filename (optional)
 - line number(optional)
 
+## Usage
+
+### Install the app on a repository
+
+- https://github.com/apps/unblock-me
+
 ## Setup
 
 ```sh
