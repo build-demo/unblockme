@@ -2,6 +2,35 @@
 
 > A GitHub App built with [Probot](https://github.com/probot/probot) that An application that is triggered to seek for technical assistance from mentors,pod leaders, fellows, etc
 
+Unblockme is a way to indicate the need for assistance from a pod leader, a mentor or other fellows.
+All one needs to do is to create a markdown file with the name unblockme.md.
+The file should contain the following fields:
+[Source of assistance]
+
+- Podleader assistUnblockme is a way to indicate the need for assistance from a pod leader, a mentor or other fellows.
+  All one needs to do is to create a markdown file with the name unblockme.md.
+  The file should contain the following fields:
+  [Source of assistance]
+- Podleader assist
+- Mentor assist
+- Fellows assist
+
+[Blocker Details ]
+
+- Repo name
+- Description
+- Filename (optional)
+- line number(optional)
+- Mentor assist
+- Fellows assist
+
+[Blocker Details ]
+
+- Repo name
+- Description
+- Filename (optional)
+- line number(optional)
+
 ## Setup
 
 ```sh
