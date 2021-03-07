@@ -63,6 +63,11 @@ If you have suggestions for how unblockme could be improved, or want to report a
 
 For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
+### Debugging
+
+- Always run $ npm install and restart the server if package.json has changed.
+- To turn on verbose logging, start the server by running: $ LOG_LEVEL=trace npm start
+
 ## License
 
 [ISC](LICENSE) © 2021 Jida Asare <jakazzy@gmail.com>
