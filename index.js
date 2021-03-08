@@ -7,12 +7,12 @@ module.exports = (app) => {
   app.log.info("Yay, the app was loaded!");
 
   module.exports = app => {
-    app.on(["issues.opened", "issues.edited"], (context) => {
+    app.on(["issues.opened", "issues.edited"], async(context) => {
       const {title, body, labels, repository_url }= context.payload.issue
       const IssueLabels = labels.map(label => label.name)
       if(IssueLabels.includes("help wanted")){
         const params = context.issue({ body, title, repository_url });
-        return context.octokit.issues.createComment(params);
+        return await context.octokit.issues.createComment(params);
       }
 
       
