@@ -4,14 +4,18 @@
  */
 module.exports = (app) => {
   // Your code here
-  app.log.info("Yay, the app was loaded!");
-
+ 
 
     app.on(["issues.opened", "issues.edited"], async(context) => {
       const {title, body, labels, repository_url }=  context.payload.issue
       const IssueLabels = labels.map(label => label.name)
       if(IssueLabels.includes("help wanted")){
-        context.log.info(title, body, labels, repository_url)
+        // context.log.info(title, body, labels, repository_url)
+        context.log.info(title)
+        context.log.info(body)
+        context.log.info(labels)
+        context.log.info(repository_url)
+     
       }
     
     });
