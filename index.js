@@ -6,7 +6,7 @@ module.exports = (app) => {
   // Your code here
   app.log.info("Yay, the app was loaded!");
 
-  module.exports = app => {
+
     app.on(["issues.opened", "issues.edited"], async(context) => {
       const {title, body, labels, repository_url }= await context.payload.issue
       const IssueLabels = labels.map(label => label.name)
@@ -19,7 +19,7 @@ module.exports = (app) => {
     
     });
     app.log.info("So is this how it will be")
-  }
+  
   
 
   // For more information on building apps:
