@@ -1,3 +1,4 @@
+const {sendEmail} = require('./lib/mail')
 /**
  * This is the main entrypoint to your Probot app
  * @param {import('probot').Probot} app
@@ -13,11 +14,11 @@ module.exports = (app) => {
         // context.log.info(title, body, labels, repository_url)
         context.log.info(title)
         context.log.info(body)
-        context.log.info(labels)
+        context.log.info(labels[0].name)
         context.log.info(repository_url)
      
+        await sendEmail()
       }
-    
     });
     
   
