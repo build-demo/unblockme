@@ -17,6 +17,10 @@
     "dev": "nodemon --exec npm start"
   },
   "dependencies": {
+    "discord.js": "12.5.1",
+    "dotenv": "8.2.0",
+    "mailgen": "2.0.14",
+    "nodemailer": "6.5.0",
     "probot": "^11.0.1"
   },
   "devDependencies": {
