@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "An application that is triggered to seek for technical assistance from mentors,pod leaders, fellows, etc",
-  "authors": "Jida Asare <jakazzy@gmail.com>, Israel Adetunji <email>, Ridham Bhat <email>",
+  "authors": "Jida Asare <jakazzy@gmail.com>, Israel Adetunji <email>, Ridham Bhat <ridham.bhat@gmail.com>",
   "license": "ISC",
   "homepage": "https://github.com/build-demo/unblockme",
   "keywords": [
