@@ -1,12 +1,3 @@
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -61,9 +52,9 @@
 ## About The Project
 
 Unblockme is a Github bot. With unblockme, an MLH fellow can request technical assistance and schedule a meeting with a mentor.
-How? By creating an issue on a repository and --all set.
+How? By creating an issue on a repository and bam!--all set.
 The MLH mentor gets better context of the challenge the MLH fellow is experiencing.
-With Unblockme, we begin the ask right from the repository before the meeting.
+You begin the ask right from the repository before the meeting.
 All a fellow needs to schedule a meeting is to create an issue on the repository.
 
 Here's why unblockme is helpful:
@@ -76,7 +67,7 @@ A list of other used resources that were used are listed in the acknowledgments.
 
 ### Built With
 
-This section should list any major frameworks that the project was built using.
+This section lists any major frameworks that the project was built using.
 
 - [React](https://reactjs.org/)
 - [Probot](https://probot.github.io/)
@@ -219,19 +210,7 @@ Project Link: [https://github.com/build-demo/unblockme](https://github.com/build
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[mailgene]: https://www.npmjs.com/package/mailgen
 
 ## License
 
