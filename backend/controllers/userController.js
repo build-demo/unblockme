@@ -32,10 +32,9 @@ exports.isUserRegistered = (req, res) => {
     if(req.user != null){
         if(req.user.githubId.length > 0)
         return res.status(200).json(req.user)
-        return res.status(404).json({error: "Not registered"})
+        return res.status(400).json({error: "Not registered"})
     }
-    return res.status(404).json({error: "User not present"})
-    
+    return res.status(404).json({error: "User not present"})    
 }
 
 exports.registerUser = (req, res) => {
@@ -52,5 +51,16 @@ exports.registerUser = (req, res) => {
             })
         }
         return res.status(200).json(items)
+    })
+}
+
+exports.isAuthorized = (req, res) => {
+    if(req.session.isAuthorized){
+        return res.status(200).json({
+            isAuth : true
+        })
+    }
+    else return res.status(404).json({
+        error: "User not Authenticated"
     })
 }

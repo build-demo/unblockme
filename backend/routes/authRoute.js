@@ -21,7 +21,14 @@ router.get('/google',(req, res, next)=> {
 router.get('/google/callback', 
   passport.authenticate('google', {failureRedirect: process.env.failureURL+'?auth=false'}),
   function(req, res) {
-    
+    if(req.user.isRegistered){
+      //These should be edited as {frontend_url/dashbaord}
+      res.redirect('/dashboard')
+    }
+    else{
+      //These should be edited as {frontend_url/register}
+      res.redirect('/register')
+    }
 });
 
 module.exports = router;

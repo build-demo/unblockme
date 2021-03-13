@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const meetingSchema = require('./meetingSchema')
 const verifyGithubId = require('../validators/githubIdValidator')
-const request = require('request')
 
 var userSchema = new mongoose.Schema({
     email: {
@@ -23,7 +22,7 @@ var userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         validate: {
-            isAsync: true,
+            // isAsync: true,
             validator: (value) => {
                 return verifyGithubId(value)
             },
