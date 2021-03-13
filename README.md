@@ -149,11 +149,13 @@ This is an example of how to list things you need to use the software and how to
 ```sh
 #Blocker Details
 
-- Mentor assist=true
-- Description=I need help with this project ...
-- Programming Language= Language
-- Filename (optional)
-- line number(optional)
+Mentor assist=true
+Name=Name of Fellow
+Email=example@example.com
+Description=I need help with this project ...
+Programming Language=Language
+Filename (optional)
+line number(optional)
 
 ```
 

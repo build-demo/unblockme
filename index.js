@@ -1,4 +1,5 @@
 const {sendEmail} = require('./lib/mail')
+const { getIssueDescription } = require('./lib/helper')
 
 /**
  * This is the main entrypoint to your Probot app
@@ -11,16 +12,9 @@ module.exports = (app) => {
     app.on(["issues.opened", "issues.edited"], async(context) => {
       const {title, body, labels, repository_url }=  context.payload.issue
 
-      // this is to get the programming language from the issue description
-      let getIssueDescription = body.split("\n").reduce(function(obj, str, index) {
-        let strParts = str.split("=");
-        if (strParts[0] && strParts[1]) { //<-- Make sure the key & value are not undefined
-          obj[strParts[0].replace(/\s+/g, '')] = strParts[1].trim(); //<-- Get rid of extra spaces at beginning of value strings
-        }
-        return obj;
-      }, {});
+    
 
-      const {Mentorassist, Name, Email, Description , ProgrammingLanguage} = getIssueDescription
+      const {Mentorassist, Name, Email, Description , ProgrammingLanguage} = getIssueDescription(body)
       
       const IssueLabels = labels.map(label => label.name)
       if(!IssueLabels.length){
