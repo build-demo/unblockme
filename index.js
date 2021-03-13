@@ -10,25 +10,37 @@ module.exports = (app) => {
 
     app.on(["issues.opened", "issues.edited"], async(context) => {
       const {title, body, labels, repository_url }=  context.payload.issue
+
+      // this is to get the programming language from the issue description
+      let getIssueDescription = body.split("\n").reduce(function(obj, str, index) {
+        let strParts = str.split("=");
+        if (strParts[0] && strParts[1]) { //<-- Make sure the key & value are not undefined
+          obj[strParts[0].replace(/\s+/g, '')] = strParts[1].trim(); //<-- Get rid of extra spaces at beginning of value strings
+        }
+        return obj;
+      }, {});
+
+      const {Mentorassist, Name, Email, Description , ProgrammingLanguage} = getIssueDescription
+      
       const IssueLabels = labels.map(label => label.name)
       if(!IssueLabels.length){
         const params = context.issue({ body: "it seems the issue has no label do you want to be connected to a mentor?" })
-        return context.octokit.issues.createComment(params)
+        return await context.octokit.issues.createComment(params)
       }
       if(!body){
         const params = context.issue({ body: "It seems the issue has no information, kindly edit the information if you want to be connected to a mentor" })
-        return context.octokit.issues.createComment(params)
+        return await context.octokit.issues.createComment(params)
       }
-      if(IssueLabels.includes("help wanted") && body){
+      if(IssueLabels.includes("help wanted") && (body && Email && ProgrammingLanguage) ){
         // context.log.info(title, body, labels, repository_url)
         context.log.info(title)
         context.log.info(body)
         context.log.info(labels[0].name)
         context.log.info(repository_url)
      
-        await sendEmail()
-        const params = context.issue({ body: "Awesome, Issue successfully created. Check your email to schedule a session with a mentor" })
-        return context.octokit.issues.createComment(params)
+         await sendEmail(Name, Email)
+        const params = await context.issue({ body: "Awesome, Issue successfully created. Check your email to schedule a session with a mentor" })
+        return await context.octokit.issues.createComment(params)
       }   
     });
     
