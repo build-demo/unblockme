@@ -1,5 +1,7 @@
 const {sendEmail} = require('./lib/mail')
 const { getIssueDescription } = require('./lib/helper')
+const { saveMeetingDetails } = require('./lib/api')
+
 
 /**
  * This is the main entrypoint to your Probot app
@@ -10,9 +12,7 @@ module.exports = (app) => {
  
 
     app.on(["issues.opened", "issues.edited"], async(context) => {
-      const {title, body, labels, repository_url }=  context.payload.issue
-
-    
+      const {title, body, labels, repository_url, id }=  context.payload.issue
 
       const {Mentorassist, Name, Email, Description , ProgrammingLanguage} = getIssueDescription(body)
       
@@ -25,14 +25,20 @@ module.exports = (app) => {
         const params = context.issue({ body: "It seems the issue has no information, kindly edit the information if you want to be connected to a mentor" })
         return await context.octokit.issues.createComment(params)
       }
-      if(IssueLabels.includes("help wanted") && (body && Email && ProgrammingLanguage) ){
+      if(IssueLabels.includes("help wanted") && (body && Email && ProgrammingLanguage) && Mentorassist ){
         // context.log.info(title, body, labels, repository_url)
-        context.log.info(title)
-        context.log.info(body)
-        context.log.info(labels[0].name)
-        context.log.info(repository_url)
+        const meetingInfo = {
+          name: Name, description: body, issueId: id, githubRepo: repository_url
+        }
+        console.log(Name, Email, body, repository_url);
+        await saveMeetingDetails(meetingInfo)
+        // context.log.info(title)
+        // context.log.info(id)
+        // context.log.info(body)
+        // context.log.info(labels[0].name)
+        // context.log.info(repository_url)
      
-         await sendEmail(Name, Email)
+        await sendEmail(Name, Email, id, ProgrammingLanguage)
         const params = await context.issue({ body: "Awesome, Issue successfully created. Check your email to schedule a session with a mentor" })
         return await context.octokit.issues.createComment(params)
       }   
