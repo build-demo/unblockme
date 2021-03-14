@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { getPrimaryCalendar} = require('./calendarConfig')
 const User = require('../models/userModel');
 const {getParamsFromUrl} = require('../utils/util')
 
@@ -18,7 +19,12 @@ passport.use(
         callbackURL: process.env.callbackURL,
         // passReqToCallback: true
     },async (accessToken, refreshToken, profile, done) => {
+        
         console.log('passport callback function fired:')
+        console.log(refreshToken,'this is the refresh token');
+        console.log(accessToken,'this is the access token');
+
+        
         // console.log(accessToken['_parsedUrl']['query'])
         // console.log("RefreshToken => " + refreshToken)
         // console.log(profile)
@@ -36,10 +42,17 @@ passport.use(
                         done(null, profile)
                     }
                     else{
+                        const primaryCalendar = await getPrimaryCalendar(refreshToken)
+                        const calendarId=  primaryCalendar.id
+                        const userId = calendarId || profileData.email
+                        const calendar = `https://calendar.google.com/calendar/u/0/r?cid=${calendarId}`
+
                         const newUser = new User({
                             email: profileData.email,
                             name: profileData.name,
-                            profilepicture: profileData.picture
+                            profilepicture: profileData.picture,
+                            calendar,
+                            refreshToken
                         })
                         await newUser.save((err, feedback) => {
                             if(err) return {error : "Not able to save new user"}
@@ -50,3 +63,5 @@ passport.use(
             })
     })
 );
+
+// https://myaccount.google.com/permissions
