@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const meetingSchema = require('./meetingSchema')
+// const meetingSchema = require('./meetingSchema')
 const verifyGithubId = require('../validators/githubIdValidator')
 
 var userSchema = new mongoose.Schema({
@@ -18,6 +18,11 @@ var userSchema = new mongoose.Schema({
         type: String,
         trim: true,
     },
+    calendar: String,
+    javascript : Boolean,
+    ruby: Boolean,
+    python: Boolean,
+    issueId: String,
     githubId: {
         type: String,
         trim: true,
@@ -30,12 +35,12 @@ var userSchema = new mongoose.Schema({
         },
         default: ""
     },
+    bio: String,
+    refreshToken: String,
     proficientLanguages: [{
         type: String
     }],
-    meetings : [
-        meetingSchema   
-    ]
+   
 }, {timestamps: true})
 
 module.exports = new mongoose.model('User', userSchema)
