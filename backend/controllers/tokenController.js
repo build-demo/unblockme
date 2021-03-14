@@ -12,6 +12,26 @@ async function saveToken(token) {
     }
 }
 
+exports.findToken = (req, res, next) => {
+    Token.findOne({email:req.body.email})
+    .exec((err, items) => {
+        if(err)
+        return res.status(400).json({error:err})
+        req.token = items
+        next()
+    })
+}
+
+exports.findMentorToken = (req, res, next) => {
+    Token.findOne({email:req.body.mentorEmail})
+    .exec((err, items) => {
+        if(err)
+        return res.status(400).json({error:err})
+        req.token = items
+        next()
+    })
+}
+
 exports.addTokenFn = (email, refreshToken) => {
     const newToken = new Token({
         email: email,
@@ -30,4 +50,13 @@ exports.addTokenFn = (email, refreshToken) => {
                 saveToken(newToken)
             }
         })
+}
+
+exports.isAuthorized = (req, res, next) => {
+    if(req.isAuthorized()){
+        next()
+    }
+    else{
+        res.redirect(process.env.FRONTEND_HOMEPAGE)
+    } 
 }

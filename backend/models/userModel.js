@@ -35,7 +35,16 @@ var userSchema = new mongoose.Schema({
     }],
     meetings : [
         meetingSchema   
-    ]
+    ],
+    calendarsCheck : {
+        type: [{
+            type: String
+        }],
+        default: function(){
+            const _t = this
+            return [_t.email]
+        }
+    },
 }, {timestamps: true})
 
 module.exports = new mongoose.model('User', userSchema)

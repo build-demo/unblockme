@@ -1,4 +1,6 @@
 const User = require('../models/userModel')
+const CryptoJS = require('crypto-js')
+const {getAccessToken, listCalendars} = require('../utils/calendarFunctions')
 
 exports.addUser = (req, res) => {
     const user = new User(req.body)
@@ -38,7 +40,7 @@ exports.isUserRegistered = (req, res) => {
 }
 
 exports.registerUser = (req, res) => {
-    User.findOneAndUpdate({email: req.body.email}, {githubId: req.body.githubId}, {runValidators: true})
+    User.findOneAndUpdate({email: req.body.email}, {"$set": {githubId: req.body.githubId, proficientLanguages: req.body.proficientLanguages}}, {runValidators: true})
     .exec((err, items) => {
         if(!items){
             return res.status(404).json({
@@ -54,13 +56,52 @@ exports.registerUser = (req, res) => {
     })
 }
 
-exports.isAuthorized = (req, res) => {
-    if(req.session.isAuthorized){
-        return res.status(200).json({
-            isAuth : true
-        })
-    }
-    else return res.status(404).json({
-        error: "User not Authenticated"
+exports.updateProficientLanguage = (req, res) => {
+    User.findOneAndUpdate({email: req.body.email}, {proficientLanguages: req.body.proficientLanguages}, {runValidators: true})
+    .exec((err, items) => {
+        if(!items){
+            return res.status(404).json({
+                error: "No user found"
+            })
+        }
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
+        }
+        return res.status(200).json(items)
     })
 }
+
+exports.getAllCalendars = (req, res) => {
+    if(req.token != null){
+        let decryptedRT = CryptoJS.AES.decrypt(req.token.refreshToken, process.env.CRYPTO_SECRET).toString(CryptoJS.enc.Utf8)
+        getAccessToken(decryptedRT).then((accessToken)=>{
+            listCalendars(accessToken).then((calList)=> {
+                return res.status(200).json({calendarList: calList})
+            })
+        })
+    }
+    else{
+        return res.status(404).json({error: 'Token Not Found'})
+    }
+}
+
+exports.updateCheckCalendars = (req, res) => {
+    User.findOneAndUpdate({email: req.body.email}, {calendarsCheck: req.body.calendarsCheck}, {runValidators: true})
+    .exec((err, items) => {
+        if(!items){
+            return res.status(404).json({
+                error: "No user found"
+            })
+        }
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
+        }
+        return res.status(200).json(items)
+    })
+}
+
+

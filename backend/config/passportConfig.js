@@ -9,8 +9,8 @@ passport.serializeUser(function (user, cb){
     cb(null, user.id);
 });
 
-passport.deserializeUser(function(obj, cb){
-    cb(null, obj);
+passport.deserializeUser(function(user_id, cb){
+    cb(null, user_id);
 });
 
 passport.use(

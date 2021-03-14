@@ -18,18 +18,19 @@ router.get('/google',(req, res, next)=> {
       'https://www.googleapis.com/auth/calendar.calendarlist.readonly',
       'https://www.googleapis.com/auth/calendar.events.freebusy',
       'https://www.googleapis.com/auth/calendar.freebusy',
+      'https://www.googleapis.com/auth/calendar.events'
     ]
 }));
 
 router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: process.env.failureURL+'?auth=false'}),
+  passport.authenticate('google', { failureRedirect: process.env.FRONTEND_HOMEPAGE }),
   function(req, res) {
     if(req.user.isRegistered){
       //These should be edited as {frontend_url/dashboard}
-      res.redirect('/dashboard')
+      res.redirect(process.env.REGISTER_URL+'?email='+req.user._json.email)
     }
     else{
-      res.redirect('/register')
+      res.redirect(process.env.DASHBOARD_URL)
     }
 });
 

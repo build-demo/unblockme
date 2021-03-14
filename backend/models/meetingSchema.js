@@ -1,17 +1,22 @@
 const mongoose = require('mongoose')
 
 var meetingSchema = new mongoose.Schema({
-    from: {
-        type: String,
-        required: true,
-    },
     with: {
         type: String,
         required: true,
     },
-    githubRepo: {
-        type: String
+    startTime : {
+        type: String,
+        required: true,
     },
+    endTime: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = meetingSchema
