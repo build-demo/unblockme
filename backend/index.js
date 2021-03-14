@@ -13,6 +13,7 @@ const cookieSession = require('cookie-session')
 
 const userRoute = require('./routes/userRoute')
 const authRoute = require('./routes/authRoute')
+const meetingRoute = require('./routes/meetingRoute')
 
 const app = express()
 
@@ -67,8 +68,9 @@ app.use(cookieSession({
 //port to run the app
 const port = process.env.PORT||8000
 
-app.use('/user', userRoute)
+app.use('/users', userRoute)
 app.use('/auth', authRoute)
+app.use('/meetings', meetingRoute)
 
 //app start
 app.listen(port, () => {
