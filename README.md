@@ -153,7 +153,7 @@ Mentor assist=true
 Name=Name of Fellow
 Email=example@example.com
 Description=I need help with this project ...
-Programming Language=Language
+Programming Language=[JavaScript,Ruby,Python]
 Filename (optional)
 line number(optional)
 
