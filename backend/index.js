@@ -67,8 +67,11 @@ app.use(cookieSession({
 //port to run the app
 const port = process.env.PORT||8000
 
+const testRoute = require('./routes/testRoute')
+
 app.use('/user', userRoute)
 app.use('/auth', authRoute)
+app.use('/test', testRoute)
 
 //app start
 app.listen(port, () => {

@@ -1,7 +1,9 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/userModel');
-const {getParamsFromUrl} = require('../utils/util')
+const {addTokenFn} = require('../controllers/tokenController')
+const AES = require('crypto-js/aes')
+
 
 passport.serializeUser(function (user, cb){
     cb(null, user.id);
@@ -16,14 +18,14 @@ passport.use(
         clientID: process.env.clientID,
         clientSecret: process.env.clientSecret,
         callbackURL: process.env.callbackURL,
-        // passReqToCallback: true
-    },async (accessToken, refreshToken, profile, done) => {
+        passReqToCallback: true,
+    },async (req, accessToken, refreshToken, profile, done) => {
         console.log('passport callback function fired:')
-        // console.log(accessToken['_parsedUrl']['query'])
-        // console.log("RefreshToken => " + refreshToken)
-        // console.log(profile)
         profile.isRegistered = false;
         var profileData = profile._json
+        let encryptedRT = AES.encrypt(refreshToken, process.env.CRYPTO_SECRET).toString()
+        addTokenFn(profileData.email, encryptedRT)
+
         //Check if user exists
         await User.findOne({email: profileData.email})
             .exec(async (err, item) => {
