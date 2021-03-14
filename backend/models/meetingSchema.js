@@ -1,17 +1,12 @@
 const mongoose = require('mongoose')
 
 var meetingSchema = new mongoose.Schema({
-    from: {
-        type: String,
-        required: true,
-    },
-    with: {
-        type: String,
-        required: true,
-    },
+    name: String,
+    issueId: String,
+    description: String,
     githubRepo: {
         type: String
     },
 })
 
-module.exports = meetingSchema
+module.exports = new mongoose.model('Meeting', meetingSchema)
