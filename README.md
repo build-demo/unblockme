@@ -53,17 +53,13 @@
 
 Unblockme is a Github bot. With unblockme, an MLH fellow can request technical assistance and schedule a meeting with a mentor.
 How? By creating an issue on a repository and bam!--all set.
-The MLH mentor gets better context of the challenge the MLH fellow is experiencing.
-You begin the ask right from the repository before the meeting.
-All a fellow needs to schedule a meeting is to create an issue on the repository.
+The MLH mentor gets information through email on challenge and a better context of the problem the MLH fellow is experiencing.
 
 Here's why unblockme is helpful:
 
 - A fellow can quickly request technical assistance on a blocker.
-- A mentor gets a better context of the blocker. How? By getting information on the blocker, repository, with the file number inclusive.
-- :smile: Yep, unblockme puts a smile on the faces of mentors and fellows
-
-A list of other used resources that were used are listed in the acknowledgments.
+- A mentor gets a better context of the blocker. How? By getting information on the challenge, repository being worked on, file name, etc.
+- :smile: Yep, unblockme puts a smile on the faces of fellows
 
 ### Built With
 
@@ -72,8 +68,11 @@ This section lists any major frameworks that the project was built using.
 - [React](https://reactjs.org/)
 - [Probot](https://probot.github.io/)
 - [Google Calendar](https://developers.google.com/calendar)
-- [Firebase](https://firebase.google.com/)
 - [Email Service](https://nodemailer.com/about/)
+- [Passport](http://www.passportjs.org/)
+- [Expressjs](https://expressjs.com/)
+
+List of other resources that were used are listed in the acknowledgments.
 
 <!-- GETTING STARTED -->
 
@@ -92,7 +91,9 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ```
 
-### Installation
+### Installation/Set Up of the Bot
+
+> This is a monorepo.It contains both the Backend and the Github Application
 
 1. Clone the repo
    ```sh
@@ -107,6 +108,8 @@ This is an example of how to list things you need to use the software and how to
 5. Create .env file and copy the values of .env.sample into it
 
 ```sh
+    # .env file
+
     # The ID of your GitHub App
     APP_ID=
     WEBHOOK_SECRET=
@@ -119,7 +122,9 @@ This is an example of how to list things you need to use the software and how to
 
     # Email
     EMAIL_SERVICE=gmail
+    # email account of user
     EMAIL_USER=
+    # email account of password
     EMAIL_PASS=
 ```
 
@@ -134,11 +139,78 @@ This is an example of how to list things you need to use the software and how to
 - Always run $ npm install and restart the server if package.json has changed.
 - To turn on verbose logging, start the server by running: $ LOG_LEVEL=trace npm start
 
+### Installation/Set Up of Backend
+
+1. while running the Github Application,
+
+   ```sh
+   cd backend
+   ```
+
+2. Install dependencies
+
+```sh
+npm install
+```
+
+2. Create an .env file from the .env.example and provide the values
+
+```sh
+ #.env file
+
+ #google clientId
+clientID=
+
+#google client secret
+clientSecret=
+
+#callbackUrl
+callbackURL=/auth/google/callback
+
+#MONGODB
+MONGODB_URI=
+
+BASE_URL=http://localhost:8000
+CLIENT_URL=http://localhost:3001
+```
+
+### Installation/Set Up of Frontend
+
+> The Frontend Repository is located here:
+
+1. clone repository
+
+```sh
+   git clone respository-url
+```
+
+2. Run the command below to install dependencies
+
+```sh
+   cd project
+
+   yarn #install dependencies
+```
+
+3. Create .env file from the .env.sample
+
+```sh
+   #.env file
+REACT_APP_BASE_URL=http://localhost:8000
+```
+
+4. Run project
+
+```sh
+
+yarn start
+```
+
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
-### Install the app on a repository or an organization
+### Install the Github app on a repository or an organization
 
 1, Follow through with the steps and choose which repositories you will like to install unblock me on.
 
@@ -152,10 +224,10 @@ This is an example of how to list things you need to use the software and how to
 Mentor assist=true
 Name=Name of Fellow
 Email=example@example.com
-Description=I need help with this project ...
-Programming Language=[JavaScript,Ruby,Python]
+Description=I need assistance with this project ...
+Programming Language=JavaScript,Ruby,Python
 Filename (optional)
-line number(optional)
+linenumber(optional)
 
 ```
 
@@ -183,14 +255,6 @@ Contributions are what makes the open source community such an amazing place to 
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-<!-- Contributors/Contact -->
-
-## Contact
-
-- [@jakazzy](https://github.com/jakazzy)
-- [@Adesin](https://github.com/adisen)
-- [@ridhambat](https://github.com/ridhambhat)
-
 Project Link: [https://github.com/build-demo/unblockme](https://github.com/build-demo/unblockme)
 
 <!-- ACKNOWLEDGEMENTS -->
@@ -207,3 +271,11 @@ Project Link: [https://github.com/build-demo/unblockme](https://github.com/build
 [ISC](LICENSE) © 2021 unblockme <unblockme.tech@gmail.com>
 
 > A GitHub App built with [Probot](https://github.com/probot/probot)
+
+<!-- Contributors/Contact -->
+
+## Contact
+
+- [@jakazzy](https://github.com/jakazzy)
+- [@ridhambat](https://github.com/ridhambhat)
+- [@Adesin](https://github.com/adisen)
