@@ -35,6 +35,8 @@ var userSchema = new mongoose.Schema({
         },
         default: ""
     },
+    githubRefreshToken: String,
+    githubEmail: String,
     bio: String,
     refreshToken: String,
     proficientLanguages: [{
