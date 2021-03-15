@@ -24,7 +24,7 @@ passport.use(
         console.log(refreshToken,'this is the refresh token');
         console.log(accessToken,'this is the access token');
 
-        
+    
         // console.log(accessToken['_parsedUrl']['query'])
         // console.log("RefreshToken => " + refreshToken)
         // console.log(profile)
@@ -45,7 +45,7 @@ passport.use(
                         const primaryCalendar = await getPrimaryCalendar(refreshToken)
                         const calendarId=  primaryCalendar.id
                         const userId = calendarId || profileData.email
-                        const calendar = `https://calendar.google.com/calendar/u/0/r?cid=${calendarId}`
+                        const calendar = `https://calendar.google.com/calendar/u/0/r?cid=${userId}`
 
                         const newUser = new User({
                             email: profileData.email,
