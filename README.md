@@ -172,6 +172,11 @@ MONGODB_URI=
 
 BASE_URL=http://localhost:8000
 CLIENT_URL=http://localhost:3001
+
+#GITHUB_AUTH for the Github Authentication
+GITHUB_AUTH_CLIENT_SECRET=
+GITHUB_AUTH_CLIENT_ID=
+GITHUB_CALLBACK=http://localhost:8000/auth/github/callback
 ```
 
 ### Installation/Set Up of Frontend
